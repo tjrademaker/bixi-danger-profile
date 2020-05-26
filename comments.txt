@@ -1,0 +1,31 @@
+Issues - one directionness is not preserved via 
+osmnx network_type = 'walk' graph generation
+
+
+
+
+if we use network_type = 'bike' - goes up on McTavish through very steep paths up to the main road up the mountain. That is the shortest. Not the best one, clearly
+
+URLs
+http://www.montrealgazette.com/news/road-safety/map/map_page.html
+https://docs.google.com/spreadsheets/d/1x5IUYz93S-xa_4TJZh4HymJQFSCDfNAtOiTrWLdo50E/edit#gid=0
+http://www.montrealgazette.com/news/bike-accidents/index.html
+
+We are conservative in our approach (more bikers on the road (they take different writes))
+
+Pattern recognition:
+	
+	Clustering
+	Clustering + Gaussian distribution --> Gaussian mixture models
+	Gaussianized heatmap * where people bike -> recover streets
+
+	Visualize random selection of personal Bixi maps
+
+
+Tomorrow morning: what were in retrospect good objectives
+
+
+For presentation: biking picture
+
+
+Report
