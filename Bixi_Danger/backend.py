@@ -4,7 +4,7 @@ import csv
 import editdistance
 
 def station_location(year):
-	"""Reads cvs file containing all locations of bixi station for a given year.
+	"""Reads csv file containing all locations of bixi station for a given year.
 
 	Args:
 		year (string)      : year of your bixi data
@@ -101,9 +101,58 @@ def reformat_bixi_data(df, station_dict, filename):
 
 
 
+def filter_rides(df,neighborhood="all",year=2018):
+    """Filter rides for which start or end Bixi station (or both) is not within the specified neighborhood. 
+    Filters nothing when neighborhood is "all" or not specified
+    
+    Args:
+        df (pd.DataFrame): reformatted dataframe
+        neighborhood (str): neighborhood in Montreal that specifies which rides to keep
+        year (str): year from which to extract Bixi stations
+    Returns:
+        df (pd.DataFrame): cleaned dataframe
+    """
+    
+    # Keep all rides
+    if neighborhood == "all":
+        return df
+    
+    # List of stations keep rides starting and ending at stations in the Plateau (precomputed boundary)
+    elif neighborhood == "Plateau": 
+        stations_info=pd.read_csv('data/bixi/BixiMontrealRentals%s/Stations_%s_Plateau.csv'%(year,year))
 
+    # Given a neighborhood name, find Bixi stations in this area
+    else:
+        stations = create_all_routes(neighborhood,year)
+    
+    stations=stations_info.code.astype("str").to_list()
+    for idx in df.index:
+        orig,dest = df.loc[idx,["start_station_code","end_station_code"]]
 
+        # If not both origin and destination station in neighborhood, drop row
+        if not ((orig in stations) & (dest in stations)):
+            df.drop(idx,axis=0,inplace=True)
+    return df
+    
 
+### TODO, function is not complete
+def create_all_routes(neighborhood,year):
+	"""Create routes of specified neighborhood
+
+	Args:
+		neighborhood (str): neighborhood in Montreal that specifies stations in what area to keep
+		year (str): year from which to extract Bixi stations
+	Returns:
+		stations (pd.DataFrame): dataframe with station code, intersection, latitude and longitude of station on Bixi stations in a neighborhood during a given year
+
+	TODO:rewrite create-all-routes notebook
+
+	- Takes a while to run
+	- open street maps cannot search for neighborhood boundaries just yet, so figure this out
+
+	"""
+	stations.to_csv("data/bixi/BixiMontrealRentals%s/Stations_%s_%s.csv"%(year,year,neighborhood))
+	return stations
 
 
 
