@@ -86,7 +86,7 @@ def save_maps(density_map):
 	"""
 	boolean_map = density_map.copy()
 	boolean_map[boolean_map != 0] = 1
-	with open('../data/maps.pkl','wb') as f:
+	with open('data/maps.pkl','wb') as f:
 		pickle.dump((density_map,boolean_map),f)
 	return boolean_map
 
