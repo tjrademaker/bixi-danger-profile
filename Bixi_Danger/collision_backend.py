@@ -32,7 +32,7 @@ def coordinate_grid(latmin, latmax, lonmin, lonmax, nlat, nlon):
 	position = np.dstack((xv, yv))
 	return delta, position, mins, maxs
 
-def get_density_map(year, nstep = 1000):
+def get_density_map(year, mins, delta, nstep = 1000):
 	"""Create coordinate map and marks how mane bike traversed each coordinates based on BIXI data.
 
 	Args:
