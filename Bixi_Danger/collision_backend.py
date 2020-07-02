@@ -49,7 +49,10 @@ def get_density_map(year, nstep = 1000):
 	for k in range(4,11):
 		print('month is %d'%k)
 		month = str(k)
-		df = pd.read_csv('data/bixi/BixiMontrealRentals'+year+'/OD_'+year+'-0'+month+'-filtered.csv')
+		if len(k)==1:
+			df = pd.read_csv('data/bixi/BixiMontrealRentals'+year+'/OD_'+year+'-0'+month+'-filtered.csv')
+		elif len(k)==2:
+			df = pd.read_csv('data/bixi/BixiMontrealRentals'+year+'/OD_'+year+'-'+month+'-filtered.csv')
 		for j in range(len(df)):
 			try:
 				route = dic[df['name'].values[j]]
