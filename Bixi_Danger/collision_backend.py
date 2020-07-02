@@ -45,6 +45,10 @@ def get_density_map(year, nstep = 1000):
 	# create empty map
 	density_map = np.zeros((nstep, nstep))
 
+	# open pickle with all routes 
+	with open('../data/routes.pkl','rb') as f:
+		dic = pickle.load(f)
+
 	# open all bixi routes pickle
 	for k in range(4,11):
 		print('month is %d'%k)
